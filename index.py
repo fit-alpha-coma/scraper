@@ -62,7 +62,7 @@ def main():
     existing_jobs, processed_companies = load_progress()
     
     # Read company list
-    uk_jobs = pd.read_csv("US.csv")
+    uk_jobs = pd.read_csv("netherlands.csv")
     company_name = uk_jobs["company"].unique()
     
     # Filter out already processed companies
@@ -87,13 +87,14 @@ def main():
                         continue
             
             jobs = scrape_jobs(
-                site_name=["indeed",  "glassdoor"],
-                search_term=f'Company: "{company}"',
-                google_search_term=f'Company: "{company}" job postings in United States',
-                country_indeed='United States',
-                location="United States",
+                site_name="linkedin",
+                search_term=f'{company}',
+                google_search_term=f'Company: "{company}" job postings in Netherlands',
+                country_indeed='Netherlands',
+                location="Netherlands",
                 hours_old=720,
             )
+            print(jobs)
             
             if not jobs.empty:
                 # Add metadata
